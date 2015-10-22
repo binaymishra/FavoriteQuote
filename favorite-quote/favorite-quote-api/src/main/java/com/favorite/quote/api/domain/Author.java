@@ -1,9 +1,15 @@
 package com.favorite.quote.api.domain;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.StringUtils;
 
-public class Author {
+public class Author implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String firstName;
 	private String middleName;
