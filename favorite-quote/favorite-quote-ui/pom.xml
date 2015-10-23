@@ -7,4 +7,5 @@
   </parent>
   <artifactId>favorite-quote-ui</artifactId>
   <packaging>war</packaging>
+  <version>${favorite-quote-ui-version}</version>
 </project>
