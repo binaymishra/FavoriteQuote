@@ -10,7 +10,6 @@
 	<version>${favorite-quote-service-version}</version>
 	<packaging>war</packaging>
 	<properties>
-		<favorite-quote-version>0.0.1-SNAPSHOT</favorite-quote-version>
 		<favorite-quote-service-version>0.0.1-SNAPSHOT</favorite-quote-service-version>
 	</properties>
 	<build>

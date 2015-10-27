@@ -10,7 +10,6 @@
 	<version>${favorite-quote-api-version}</version>
 	
 	<properties>
-		<favorite-quote-version>0.0.1-SNAPSHOT</favorite-quote-version>
 		<favorite-quote-api-version>0.0.1-SNAPSHOT</favorite-quote-api-version>
 	</properties>
 	
