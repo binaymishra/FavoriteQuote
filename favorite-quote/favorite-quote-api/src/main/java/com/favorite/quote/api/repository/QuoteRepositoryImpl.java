@@ -28,6 +28,7 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	private static final String AUTHOR_BY_ID_SQL = "SELECT id, firstName, middleName, lastName FROM author WHERE id = ?";
 	private static final String COUNT_QUOTES_SQL = "SELECT COUNT(id) FROM quote";
 	private static final String MAX_QUOTE_ID = "SELECT MAX(id) FROM quote";
+	private static final String MAX_AUTHOR_ID = "SELECT MAX(id) FROM author";
 	
 	
 	private static final Logger LOG = Logger.getLogger(QuoteRepository.class);
@@ -134,6 +135,11 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 				return author;
 			}
 		}, param);
+	}
+
+	@Override
+	public long getMaxAuthorId() {
+		return  template.queryForObject(MAX_AUTHOR_ID, Long.class);
 	}
 
 }

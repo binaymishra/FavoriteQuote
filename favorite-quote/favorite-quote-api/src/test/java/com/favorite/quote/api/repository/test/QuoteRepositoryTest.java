@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.favorite.quote.api.business.CounterIdGenerator;
 import com.favorite.quote.api.config.AppConfig;
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
@@ -25,7 +25,6 @@ import com.favorite.quote.api.repository.QuoteRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
-@ActiveProfiles("devlopement")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class QuoteRepositoryTest {
 	
@@ -36,7 +35,7 @@ public class QuoteRepositoryTest {
 
 	@Autowired
 	private DataSource dataSource;
-
+	
 	
 	@Test
 	public void test() {
@@ -50,37 +49,41 @@ public class QuoteRepositoryTest {
 	}
 	@Test
 	public void testCountQuotes(){
-		LOG.info("Running testCountQuotes().....");
 		int count = quoteRepository.countQuotes();
+		LOG.info(String.format("Running test for countQuotes() and %d rows found.", count));
 		Assert.assertTrue(count > 0);
 	}
 	@Test
 	public void testGetMaxQuoteId(){
-		LOG.info("Running testGetMaxQuoteId().....");
 		long maxId = quoteRepository.getMaxQuoteId();
+		LOG.info(String.format("Running test for getMaxQuoteId() and max id is %d.", maxId));
 		Assert.assertTrue(maxId > 0);
 	}
 	@Test
 	public void testFetchAllQuotes(){
-		LOG.info("Running testFetchAllQuotes().....");
 		Collection<Quote> quotes = quoteRepository.fetchAllQuotes();
+		LOG.info(String.format("Running test for fetchAllQuotes() and %d number of rows found.", quotes.size()));
 		Assert.assertTrue(quotes.size() > 0);
 	}
 	
 	@Test
 	@Transactional
 	public void testInsertAuthor(){
-		LOG.info("Running testInsertAuthor().....");
-		Author author =  new Author(3L, "Vinay", null, "Mishra");
+		CounterIdGenerator authorId = new CounterIdGenerator(this.quoteRepository.getMaxAuthorId());
+		long id = Long.parseLong(authorId.getGeneratedId());
+		Author author =  new Author(id, "Vinay", null, "Mishra");
+		LOG.info(String.format("Running test insertAuthor() with generated author id %d.",id));
 		quoteRepository.insertAuthor(author);
 	}
 	
 	@Test
 	@Transactional
 	public void testInsertQuote(){
-		LOG.info("Running testInsertQuote().....");
-		Author author =  new Author(2L);
-		Quote quote = new Quote(3L, "Be kind.", author);
+		Author author =  new Author(3L);
+		CounterIdGenerator quoteId = new CounterIdGenerator(this.quoteRepository.getMaxQuoteId());
+		long id = Long.parseLong(quoteId.getGeneratedId());
+		Quote quote = new Quote(id, "Music is the shorthand of emotion", author);
+		LOG.info(String.format("Running test for insertQuote() with generated author id %d.",id));
 		quoteRepository.insertQuote(quote);
 	}
 	

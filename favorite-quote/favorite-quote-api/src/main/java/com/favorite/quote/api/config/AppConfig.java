@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 
 
@@ -15,17 +17,20 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class AppConfig {
 	
 	@Autowired
-	DataConfig dataConfig;
+	private DataSource dataSource; 
 	
 	@Bean
-	public DataSource getDataSource() throws Exception {
-		return dataConfig.dataSource();
+	public DataSource dataSource() {
+		return new EmbeddedDatabaseBuilder()
+					.setType(EmbeddedDatabaseType.HSQL)
+					.addScript("schema.sql")
+					.addScript("data.sql")
+					.build();
 	}
-
 	@Bean
 	public DataSourceTransactionManager getDataSourceTransactionManager() throws Exception{
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-		transactionManager.setDataSource(dataConfig.dataSource());
+		transactionManager.setDataSource(dataSource);
 		return transactionManager;
 	}
 }
