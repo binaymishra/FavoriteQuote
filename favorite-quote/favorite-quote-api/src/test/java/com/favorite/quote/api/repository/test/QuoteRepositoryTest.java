@@ -79,7 +79,7 @@ public class QuoteRepositoryTest {
 	@Transactional
 	public void testInsertQuote(){
 		LOG.info("Running testInsertQuote().....");
-		Author author =  new Author(3L);
+		Author author =  new Author(2L);
 		Quote quote = new Quote(3L, "Be kind.", author);
 		quoteRepository.insertQuote(quote);
 	}
