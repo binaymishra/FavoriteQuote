@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Configuration
-@Component("com.favorite.quote.service")
+@Component("com.favorite.quote")
 public class ServiceConfig {
 
 }
