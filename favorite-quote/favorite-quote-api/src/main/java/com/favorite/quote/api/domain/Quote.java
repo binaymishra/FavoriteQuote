@@ -12,6 +12,23 @@ public class Quote implements Serializable{
 	private Long id;
 	private String quote;
 	private Author author;
+	
+	public Quote() {	}
+	
+	public Quote(Long id) {
+		super();
+		this.id = id;
+	}
+	
+	
+	public Quote(Long id, String quote, Author author) {
+		super();
+		this.id = id;
+		this.quote = quote;
+		this.author = author;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

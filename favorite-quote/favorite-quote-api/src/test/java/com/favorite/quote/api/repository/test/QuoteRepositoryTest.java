@@ -1,46 +1,86 @@
 package com.favorite.quote.api.repository.test;
 
+import java.util.Collection;
+
 import javax.sql.DataSource;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.favorite.quote.api.config.AppConfig;
+import com.favorite.quote.api.domain.Author;
+import com.favorite.quote.api.domain.Quote;
+import com.favorite.quote.api.repository.QuoteRepository;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes={AppConfig.class})
+@ActiveProfiles("devlopement")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class QuoteRepositoryTest {
 	
-	private static DataSource dataSource;
+	private static final Logger LOG = Logger.getLogger(QuoteRepositoryTest.class); 
+	
+	@Autowired
+	private QuoteRepository quoteRepository;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		dataSource = builder.setType(EmbeddedDatabaseType.HSQL).addScript("schema.sql").addScript("data.sql").build();
-	}
+	@Autowired
+	private DataSource dataSource;
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		dataSource.getConnection().close();
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	
 	@Test
 	public void test() {
+		LOG.info("Running test().....");
+		int authorRows = JdbcTestUtils.countRowsInTable(new JdbcTemplate(dataSource), "author");
+		int quoteRows = JdbcTestUtils.countRowsInTable(new JdbcTemplate(dataSource), "quote");
+		LOG.info("Table: author contains "+authorRows+" number of rows.");
+		LOG.info("Table: quote contains "+quoteRows+" number of rows.");
 		Assert.assertNotNull(dataSource);
-		int row = JdbcTestUtils.countRowsInTable(new JdbcTemplate(dataSource), "author");
-		System.err.println(row);
+		Assert.assertNotNull(quoteRepository);
 	}
-
+	@Test
+	public void testCountQuotes(){
+		LOG.info("Running testCountQuotes().....");
+		int count = quoteRepository.countQuotes();
+		Assert.assertTrue(count > 0);
+	}
+	@Test
+	public void testGetMaxQuoteId(){
+		LOG.info("Running testGetMaxQuoteId().....");
+		long maxId = quoteRepository.getMaxQuoteId();
+		Assert.assertTrue(maxId > 0);
+	}
+	@Test
+	public void testFetchAllQuotes(){
+		LOG.info("Running testFetchAllQuotes().....");
+		Collection<Quote> quotes = quoteRepository.fetchAllQuotes();
+		Assert.assertTrue(quotes.size() > 0);
+	}
+	
+	@Test
+	@Transactional
+	public void testInsertAuthor(){
+		LOG.info("Running testInsertAuthor().....");
+		Author author =  new Author(3L, "Vinay", null, "Mishra");
+		quoteRepository.insertAuthor(author);
+	}
+	
+	@Test
+	@Transactional
+	public void testInsertQuote(){
+		LOG.info("Running testInsertQuote().....");
+		Author author =  new Author(1L);
+		Quote quote = new Quote(2L, "To love oneself is the beginning of a lifelong romance.", author);
+		quoteRepository.insertQuote(quote);
+	}
 }

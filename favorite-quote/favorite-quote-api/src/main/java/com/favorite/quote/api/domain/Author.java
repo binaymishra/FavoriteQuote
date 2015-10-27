@@ -3,6 +3,8 @@ package com.favorite.quote.api.domain;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Author implements Serializable{
 	
@@ -15,6 +17,27 @@ public class Author implements Serializable{
 	private String middleName;
 	private String lastName;
 	
+	public Author() {	}
+	
+	
+	
+	public Author(Long id) {
+		super();
+		this.id = id;
+	}
+
+	
+
+	public Author(Long id, String firstName, String middleName, String lastName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -56,5 +79,14 @@ public class Author implements Serializable{
 		return fullName.toString().trim();
 	}
 	
-
+	@Override
+	public String toString() {
+		ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+		builder.append("id", this.id);
+		builder.append("firstName", this.firstName);
+		builder.append("middleName", this.middleName);
+		builder.append("lastName", this.lastName);
+		builder.append("fullName", this.getFullName());
+		return builder.toString();
+	}
 }

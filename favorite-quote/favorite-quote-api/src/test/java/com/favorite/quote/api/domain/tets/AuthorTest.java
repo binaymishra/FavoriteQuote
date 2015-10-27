@@ -12,10 +12,11 @@ public class AuthorTest {
 	@Test
 	public void testGetFullName(){
 		Author author = new Author();
+		author.setId(0L);
 		author.setFirstName("Binay");
 		author.setMiddleName("Kumar");
-		author.setLastName(null);
-		System.err.println(author.getFullName());
+		author.setLastName("Mishra");
+		System.err.println(author);
 		Assert.assertTrue(StringUtils.isNotBlank(author.getFullName()));
 	}
 

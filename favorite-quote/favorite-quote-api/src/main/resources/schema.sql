@@ -1,4 +1,5 @@
 DROP TABLE quote IF EXISTS;
+DROP TABLE author IF EXISTS;
 
 CREATE TABLE author(
   	id         					SMALLINT,		
@@ -11,7 +12,7 @@ CREATE TABLE author(
 CREATE TABLE quote(
   	id         				SMALLINT,		
   	quote 					VARCHAR(4000),
-  	author_id				SMALLINT,
+  	author_id				SMALLINT UNIQUE NOT NULL,
   	CONSTRAINT pk_quote PRIMARY KEY (id),
   	CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES author (id)
 );
