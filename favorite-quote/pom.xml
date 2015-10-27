@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.favorite.quote</groupId>
 	<artifactId>favorite-quote</artifactId>
-	<version>${favorite-quote-version}</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>favorite-quote-api</module>
@@ -12,10 +12,6 @@
 	</modules>
 	<properties>
 		<favorite-quote-version>0.0.1-SNAPSHOT</favorite-quote-version>
-		<favorite-quote-api-version>0.0.1-SNAPSHOT</favorite-quote-api-version>
-		<favorite-quote-service-version>0.0.1-SNAPSHOT</favorite-quote-service-version>
-		<favorite-quote-ui-version>0.0.1-SNAPSHOT</favorite-quote-ui-version>
-
 		<java.version>1.7</java.version>
 
 		<spring.version>4.1.6.RELEASE</spring.version>
