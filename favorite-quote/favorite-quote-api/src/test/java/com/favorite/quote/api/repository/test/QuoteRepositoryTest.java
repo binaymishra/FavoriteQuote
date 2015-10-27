@@ -92,6 +92,13 @@ public class QuoteRepositoryTest {
 		Assert.assertTrue(quotes.size() > 0);
 	}
 	@Test
+	public void testFetchQuoteByIdNotFound(){
+		LOG.info("Running testFetchQuoteByIdNotFound().....");
+		Collection<Quote> quotes = quoteRepository.fetchQuoteById(100L);
+		System.out.println(quotes.size());
+		Assert.assertFalse(quotes.size() > 0);
+	}
+	@Test
 	public void testFetchAuthorById(){
 		LOG.info("Running testFetchAuthorById().....");
 		Collection<Author> authors = quoteRepository.fetchAuthorById(1L);

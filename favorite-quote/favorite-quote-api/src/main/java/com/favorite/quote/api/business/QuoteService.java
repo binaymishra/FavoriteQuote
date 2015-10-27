@@ -7,4 +7,5 @@ import com.favorite.quote.api.domain.Quote;
 
 public interface QuoteService {
 	public Collection<Quote> findAllQuotes();
+	public Quote findQuoteById(Long id);
 }
