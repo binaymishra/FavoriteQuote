@@ -79,8 +79,24 @@ public class QuoteRepositoryTest {
 	@Transactional
 	public void testInsertQuote(){
 		LOG.info("Running testInsertQuote().....");
-		Author author =  new Author(1L);
-		Quote quote = new Quote(2L, "To love oneself is the beginning of a lifelong romance.", author);
+		Author author =  new Author(3L);
+		Quote quote = new Quote(3L, "Be kind.", author);
 		quoteRepository.insertQuote(quote);
+	}
+	
+	@Test
+	public void testFetchQuoteById(){
+		LOG.info("Running testFetchQuoteById().....");
+		Collection<Quote> quotes = quoteRepository.fetchQuoteById(1L);
+		Assert.assertNotNull(quotes);
+		Assert.assertTrue(quotes.size() > 0);
+	}
+	@Test
+	public void testFetchAuthorById(){
+		LOG.info("Running testFetchAuthorById().....");
+		Collection<Author> authors = quoteRepository.fetchAuthorById(1L);
+		Assert.assertNotNull(authors);
+		Assert.assertTrue(authors.size() > 0);
+		
 	}
 }

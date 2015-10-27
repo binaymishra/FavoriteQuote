@@ -23,6 +23,13 @@ import com.favorite.quote.api.domain.Quote;
 @Repository("quoteRepository")
 public class QuoteRepositoryImpl implements QuoteRepository {
 	
+	private static final String QUOTE_BY_ID_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id AND q.id = ?";
+	private static final String ALL_QUOTES_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id";
+	private static final String AUTHOR_BY_ID_SQL = "SELECT id, firstName, middleName, lastName FROM author WHERE id = ?";
+	private static final String COUNT_QUOTES_SQL = "SELECT COUNT(id) FROM quote";
+	private static final String MAX_QUOTE_ID = "SELECT MAX(id) FROM quote";
+	
+	
 	private static final Logger LOG = Logger.getLogger(QuoteRepository.class);
 	
 	private JdbcTemplate template;
@@ -40,7 +47,7 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 
 	@Override
 	public Collection<Quote> fetchAllQuotes() {
-		return template.query("SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id", new RowMapper<Quote>() {
+		return template.query(ALL_QUOTES_SQL, new RowMapper<Quote>() {
 
 			@Override
 			public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -60,12 +67,12 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 
 	@Override
 	public int countQuotes() {
-		return template.queryForObject("SELECT COUNT(id) FROM quote", Integer.class);
+		return template.queryForObject(COUNT_QUOTES_SQL, Integer.class);
 	}
 
 	@Override
 	public long getMaxQuoteId() {
-		return template.queryForObject("SELECT MAX(id) FROM quote", Long.class);
+		return template.queryForObject(MAX_QUOTE_ID, Long.class);
 	}
 
 	@Override
@@ -94,7 +101,7 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	@Override
 	public Collection<Quote> fetchQuoteById(final Long id) {
 		Object[] param = {id};
-		return template.query("SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id WHERE q.id = ?", new RowMapper<Quote>() {
+		return template.query(QUOTE_BY_ID_SQL, new RowMapper<Quote>() {
 
 			@Override
 			public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -115,7 +122,7 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	@Override
 	public Collection<Author> fetchAuthorById(final Long id) {
 		Object[] param = {id};
-		return template.query("SELECT id, firstName, middleName, lastName FROM author WHERE id = ?", new RowMapper<Author>() {
+		return template.query(AUTHOR_BY_ID_SQL, new RowMapper<Author>() {
 
 			@Override
 			public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
