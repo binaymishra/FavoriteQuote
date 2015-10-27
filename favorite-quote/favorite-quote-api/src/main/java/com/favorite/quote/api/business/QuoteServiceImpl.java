@@ -2,11 +2,13 @@ package com.favorite.quote.api.business;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.favorite.quote.api.business.exception.QuoteNotFoundException;
 import com.favorite.quote.api.domain.Quote;
 import com.favorite.quote.api.repository.QuoteRepository;
 
@@ -35,7 +37,7 @@ public class QuoteServiceImpl implements QuoteService {
 			List<Quote> quotes = (List<Quote>) quoteList;
 			return quotes.get(0);
 		}else{
-			throw new RuntimeException("Quote not found for id = "+id);
+			throw new QuoteNotFoundException("Quote not found for id = "+id);
 		}
 	}
 

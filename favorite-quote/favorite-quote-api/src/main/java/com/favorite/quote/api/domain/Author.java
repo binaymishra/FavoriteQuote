@@ -48,19 +48,19 @@ public class Author implements Serializable{
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = StringUtils.defaultString(firstName, "");
 	}
 	public String getMiddleName() {
 		return middleName;
 	}
 	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+		this.middleName = StringUtils.defaultString(middleName, "");
 	}
 	public String getLastName() {
 		return lastName;
 	}
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = StringUtils.defaultString(lastName, "");
 	}
 	
 	
