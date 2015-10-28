@@ -3,6 +3,7 @@ package com.favorite.quote.service.route;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class ExceptionHandler {
 		QuoteNotFoundException exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, QuoteNotFoundException.class);
 		final Message message = exchange.getOut();
 		if (null != exception) {
-			LOGGER.debug(exception);
+			LOGGER.debug(ExceptionUtils.getMessage(exception));
 			message.setHeader(Exchange.HTTP_RESPONSE_CODE, HttpStatus.SC_NOT_FOUND);
 		}
 	}
