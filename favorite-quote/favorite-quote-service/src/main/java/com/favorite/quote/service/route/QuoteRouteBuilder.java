@@ -5,6 +5,7 @@ import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
 import com.favorite.quote.api.business.exception.QuoteNotFoundException;
+import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
 @Component
@@ -33,7 +34,12 @@ public class QuoteRouteBuilder extends RouteBuilder {
 		
 			.get("/{id}")
 			.outTypeList(Quote.class)
-			.to("bean:quoteService?method=findQuoteById(${header.id})");
+			.to("bean:quoteService?method=findQuoteById(${header.id})")
+		
+			.post("/author")
+			.type(Author.class)
+			.outTypeList(Quote.class)
+			.to("bean:quoteService?method=findQuotesByAuthor(${body})");
 
 	}
 

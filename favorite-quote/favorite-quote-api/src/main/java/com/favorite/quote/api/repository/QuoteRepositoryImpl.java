@@ -23,9 +23,11 @@ import com.favorite.quote.api.domain.Quote;
 @Repository("quoteRepository")
 public class QuoteRepositoryImpl implements QuoteRepository {
 	
+	private static final String QUOTE_BY_AUTHOR_ID_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id AND a.id = ?";
 	private static final String QUOTE_BY_ID_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id AND q.id = ?";
 	private static final String ALL_QUOTES_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id";
 	private static final String AUTHOR_BY_ID_SQL = "SELECT id, firstName, middleName, lastName FROM author WHERE id = ?";
+	private static final String COUNT_AUTHORS_SQL = "SELECT COUNT(id) FROM author";
 	private static final String COUNT_QUOTES_SQL = "SELECT COUNT(id) FROM quote";
 	private static final String MAX_QUOTE_ID = "SELECT MAX(id) FROM quote";
 	private static final String MAX_AUTHOR_ID = "SELECT MAX(id) FROM author";
@@ -140,6 +142,32 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	@Override
 	public long getMaxAuthorId() {
 		return  template.queryForObject(MAX_AUTHOR_ID, Long.class);
+	}
+
+	@Override
+	public Collection<Quote> fetchQuoteByAuthorId(Long authorId) {
+		Object[] param = {authorId};
+		return template.query(QUOTE_BY_AUTHOR_ID_SQL, new RowMapper<Quote>() {
+
+			@Override
+			public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Quote quote = new Quote();
+				quote.setId(rs.getLong(1));
+				quote.setQuote(rs.getString(2));
+				Author author = new Author();
+				author.setId(rs.getLong(3));
+				author.setFirstName(rs.getString(4));
+				author.setMiddleName(rs.getString(5));
+				author.setLastName(rs.getString(6));
+				quote.setAuthor(author);
+				return quote;
+			}
+		}, param);
+	}
+
+	@Override
+	public int countAuthors() {
+		return template.queryForObject(COUNT_AUTHORS_SQL, Integer.class);
 	}
 
 }

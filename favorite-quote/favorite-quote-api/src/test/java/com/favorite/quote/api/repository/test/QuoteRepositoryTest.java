@@ -36,7 +36,6 @@ public class QuoteRepositoryTest {
 	@Autowired
 	private DataSource dataSource;
 	
-	
 	@Test
 	public void test() {
 		LOG.info("Running test().....");
@@ -52,6 +51,12 @@ public class QuoteRepositoryTest {
 		int count = quoteRepository.countQuotes();
 		LOG.info(String.format("Running test for countQuotes() and %d rows found.", count));
 		Assert.assertTrue(count > 0);
+	}
+	@Test
+	public void testCountAuthors(){
+		int count = quoteRepository.countAuthors();
+		LOG.info(String.format("Running test for countAuthors() and %d rows found.", count));
+		Assert.assertTrue(count >= 3);
 	}
 	@Test
 	public void testGetMaxQuoteId(){
@@ -107,5 +112,11 @@ public class QuoteRepositoryTest {
 		Assert.assertNotNull(authors);
 		Assert.assertTrue(authors.size() > 0);
 		
+	}
+	@Test
+	public void testFetchQuoteByAuthorId(){
+		Collection<Quote> quotes = quoteRepository.fetchQuoteByAuthorId(1L);
+		LOG.info("Running testFetchQuoteByAuthorId() with authorId = 1 and number of row fetched is "+quotes.size());
+		Assert.assertTrue(quotes.size() >= 2);
 	}
 }

@@ -2,6 +2,9 @@ package com.favorite.quote.api.domain;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class Quote implements Serializable{
 
 	/**
@@ -49,5 +52,12 @@ public class Quote implements Serializable{
 	}
 	
 	
-
+	@Override
+	public String toString() {
+		ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+		builder.append("id", this.id);
+		builder.append("quote", this.quote);
+		builder.append("author", this.author);
+		return builder.toString();
+	}
 }
