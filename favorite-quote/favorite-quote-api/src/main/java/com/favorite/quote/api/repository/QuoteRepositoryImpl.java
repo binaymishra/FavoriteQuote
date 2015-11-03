@@ -27,13 +27,15 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	private static final String QUOTE_BY_ID_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id AND q.id = ?";
 	private static final String ALL_QUOTES_SQL = "SELECT q.id, q.quote, a.id, a.firstName, a.middleName, a.lastName FROM quote q, author a WHERE q.author_id = a.id";
 	private static final String AUTHOR_BY_ID_SQL = "SELECT id, firstName, middleName, lastName FROM author WHERE id = ?";
+	private static final String ALL_AUTHORS_SQL = "SELECT id, firstName, middleName, lastName FROM author";
 	private static final String COUNT_AUTHORS_SQL = "SELECT COUNT(id) FROM author";
 	private static final String COUNT_QUOTES_SQL = "SELECT COUNT(id) FROM quote";
-	private static final String MAX_QUOTE_ID = "SELECT MAX(id) FROM quote";
 	private static final String MAX_AUTHOR_ID = "SELECT MAX(id) FROM author";
+	private static final String MAX_QUOTE_ID = "SELECT MAX(id) FROM quote";
 	
 	
 	private static final Logger LOG = Logger.getLogger(QuoteRepository.class);
+	
 	
 	private JdbcTemplate template;
 	
@@ -168,6 +170,22 @@ public class QuoteRepositoryImpl implements QuoteRepository {
 	@Override
 	public int countAuthors() {
 		return template.queryForObject(COUNT_AUTHORS_SQL, Integer.class);
+	}
+
+	@Override
+	public Collection<Author> fetchAllAuthors(Long id) {
+		return template.query(ALL_AUTHORS_SQL, new RowMapper<Author>() {
+
+			@Override
+			public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Author author = new Author();
+				author.setId(rs.getLong("id"));
+				author.setFirstName(rs.getString("firstName"));
+				author.setMiddleName(rs.getString("middleName"));
+				author.setLastName(rs.getString("lastName"));
+				return author;
+			}
+		});
 	}
 
 }

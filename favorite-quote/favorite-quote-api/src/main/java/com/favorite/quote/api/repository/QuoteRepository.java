@@ -19,6 +19,7 @@ public interface QuoteRepository {
 	public Collection<Quote> fetchQuoteById(final Long id);
 	public Collection<Quote> fetchQuoteByAuthorId(final Long authorId);
 	
+	public Collection<Author> fetchAllAuthors(final Long id);
 	public Collection<Author> fetchAuthorById(final Long id);
 	
 	public void insertAuthor(final Author author);
