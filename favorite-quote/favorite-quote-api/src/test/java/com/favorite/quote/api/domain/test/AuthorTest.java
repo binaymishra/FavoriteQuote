@@ -1,4 +1,4 @@
-package com.favorite.quote.api.domain.tets;
+package com.favorite.quote.api.domain.test;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
