@@ -84,7 +84,7 @@ public class QuoteServiceTest {
 		author.setMiddleName("None");
 		author.setLastName("Wilde");
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
-		Assert.assertTrue(quoteList.size() == 3);
+		Assert.assertTrue(quoteList.size() == 4);
 	}
 	@Test
 	public void testFindQuotesByAuthorNotFound(){
@@ -106,7 +106,7 @@ public class QuoteServiceTest {
 		author.setMiddleName("None");
 		author.setLastName(null);
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
-		Assert.assertTrue(quoteList.size() == 3);
+		Assert.assertTrue(quoteList.size() == 4);
 	}
 	@Test
 	public void testFindQuotesByAuthorLastName(){
@@ -117,7 +117,7 @@ public class QuoteServiceTest {
 		author.setMiddleName("None");
 		author.setLastName("Wilde");
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
-		Assert.assertTrue(quoteList.size() == 3);
+		Assert.assertTrue(quoteList.size() == 4);
 	}
 	
 	@Test
@@ -129,7 +129,7 @@ public class QuoteServiceTest {
 		author.setMiddleName(null);
 		author.setLastName(null);
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
-		Assert.assertTrue(quoteList.size() == 5);
+		Assert.assertTrue(quoteList.size() == 6);
 	}
 	
 	@Test(expected=QuoteNotFoundException.class)

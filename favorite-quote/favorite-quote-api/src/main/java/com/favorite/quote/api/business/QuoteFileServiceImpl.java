@@ -4,11 +4,13 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 import com.favorite.quote.api.repository.QuoteFileDataRepository;
 
+@Service("quoteFileService")
 public class QuoteFileServiceImpl implements QuoteService {
 	
 	@Autowired
@@ -18,7 +20,7 @@ public class QuoteFileServiceImpl implements QuoteService {
 	@Override
 	public Collection<Quote> findAllQuotes() {
 		// TODO Auto-generated method stub
-		return null;
+		return quoteFileDataRepository.getAllQuotes();
 	}
 
 	@Override
