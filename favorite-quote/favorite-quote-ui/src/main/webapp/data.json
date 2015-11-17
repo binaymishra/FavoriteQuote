@@ -1,0 +1,101 @@
+[ {
+
+  "id" : 1,
+
+  "quote" : "To love oneself is the beginning of a lifelong romance.",
+
+  "author" : {
+
+    "id" : 1,
+
+    "firstName" : "Oscar",
+
+    "middleName" : "",
+
+    "lastName" : "Wilde",
+
+    "fullName" : "Oscar Wilde"
+
+  }
+
+}, {
+
+  "id" : 2,
+
+  "quote" : "Women live by their emotions and for them, they have no philosophy of life.",
+
+  "author" : {
+
+    "id" : 1,
+
+    "firstName" : "Oscar",
+
+    "middleName" : "",
+
+    "lastName" : "Wilde",
+
+    "fullName" : "Oscar Wilde"
+
+  }
+
+}, {
+
+  "id" : 3,
+
+  "quote" : "We live in an age when unnecessary things are our only necessities.",
+
+  "author" : {
+
+    "id" : 1,
+
+    "firstName" : "Oscar",
+
+    "middleName" : "",
+
+    "lastName" : "Wilde",
+
+    "fullName" : "Oscar Wilde"
+
+  }
+
+}, {
+
+  "id" : 4,
+
+  "quote" : "If you do not tell the truth about yourself you cannot tell it about other people",
+
+  "author" : {
+
+    "id" : 2,
+
+    "firstName" : "Virginia",
+
+    "middleName" : "",
+
+    "lastName" : "Woolf",
+
+    "fullName" : "Virginia Woolf"
+
+  }
+
+}, {
+
+  "id" : 5,
+
+  "quote" : "Everyone thinks of changing the world, but no one thinks of changing himself",
+
+  "author" : {
+
+    "id" : 2,
+
+    "firstName" : "Virginia",
+
+    "middleName" : "",
+
+    "lastName" : "Woolf",
+
+    "fullName" : "Virginia Woolf"
+
+  }
+
+} ]

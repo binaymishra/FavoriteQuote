@@ -1,0 +1,12 @@
+body
+{
+    font-family:Consolas;
+    font-size:medium;
+    font-weight:normal;
+    
+}
+
+.zebra-pattern{
+	background-color: #dddddd;
+	color: #666666;
+}
