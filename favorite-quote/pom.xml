@@ -25,6 +25,7 @@
 		<maven-tomcat-plugin-version>2.2</maven-tomcat-plugin-version>
 		<camel.version>2.15.2</camel.version>
 		<servlet.version>3.1.0</servlet.version>
+		<fasterxml.version>2.6.2</fasterxml.version>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -154,6 +155,12 @@
 				<artifactId>camel-jaxb</artifactId>
 				<version>${camel.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-test</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+
 			<!-- Server Dependencies -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -178,6 +185,22 @@
 				<artifactId>hsqldb</artifactId>
 				<version>${hsqldb.version}</version>
 				<scope>runtime</scope>
+			</dependency>
+			<!-- JSON Dependencies -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${fasterxml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${fasterxml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${fasterxml.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

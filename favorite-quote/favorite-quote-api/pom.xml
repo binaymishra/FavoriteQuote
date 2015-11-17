@@ -8,11 +8,11 @@
 	</parent>
 	<artifactId>favorite-quote-api</artifactId>
 	<version>${favorite-quote-api-version}</version>
-	
+
 	<properties>
 		<favorite-quote-api-version>0.0.1-SNAPSHOT</favorite-quote-api-version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Spring Dependencies -->
 		<dependency>
@@ -57,6 +57,20 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- JSON Dependencies -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 		</dependency>
 	</dependencies>
 </project>
