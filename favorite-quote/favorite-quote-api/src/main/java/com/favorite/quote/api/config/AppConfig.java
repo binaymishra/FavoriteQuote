@@ -52,4 +52,11 @@ public class AppConfig {
 		CounterIdGenerator generator = new CounterIdGenerator(template.queryForObject(IdGenerator.MAX_QUOTE_ID, Long.class));
 		return generator;
 	}
+	
+	@Bean(initMethod="loadQuotes")
+	public DataLoader loadQuoteData(){
+		DataLoader dataLoader = new DataLoader();
+		dataLoader.setFilePath("classpath:quotes.data");
+		return dataLoader;
+	}
 }

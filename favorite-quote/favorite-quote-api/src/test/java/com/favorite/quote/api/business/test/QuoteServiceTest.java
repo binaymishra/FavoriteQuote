@@ -3,7 +3,11 @@ package com.favorite.quote.api.business.test;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,26 @@ public class QuoteServiceTest {
 	@Autowired
 	@Qualifier("quoteService")
 	private QuoteService quoteService;
+	
+	private Author author;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		author = new Author();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		 author = null;
+	}
 
 	@Test
 	public void testFindAllQuotes(){
@@ -54,10 +78,10 @@ public class QuoteServiceTest {
 	@Test
 	public void testFindQuotesByAuthorFound(){
 		LOG.info("Running testFindQuotesByAuthor()...");
-		Author author = new Author();
+		author = new Author();
 		author.setId(1L);
 		author.setFirstName("Oscar");
-		author.setMiddleName(null);
+		author.setMiddleName("None");
 		author.setLastName("Wilde");
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
 		Assert.assertTrue(quoteList.size() == 3);
@@ -65,10 +89,10 @@ public class QuoteServiceTest {
 	@Test
 	public void testFindQuotesByAuthorNotFound(){
 		LOG.info("Running testFindQuotesByAuthor()...");
-		Author author = new Author();
+		author = new Author();
 		author.setId(100L);
 		author.setFirstName("Adolf");
-		author.setMiddleName(null);
+		author.setMiddleName("None");
 		author.setLastName("Hitler");
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
 		Assert.assertTrue(quoteList.isEmpty());
@@ -76,10 +100,10 @@ public class QuoteServiceTest {
 	@Test
 	public void testFindQuotesByAuthorFirstName(){
 		LOG.info("Running testFindQuotesByAuthor()...");
-		Author author = new Author();
+		author = new Author();
 		author.setId(100L);
 		author.setFirstName("Oscar");
-		author.setMiddleName(null);
+		author.setMiddleName("None");
 		author.setLastName(null);
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
 		Assert.assertTrue(quoteList.size() == 3);
@@ -87,13 +111,25 @@ public class QuoteServiceTest {
 	@Test
 	public void testFindQuotesByAuthorLastName(){
 		LOG.info("Running testFindQuotesByAuthor()...");
-		Author author = new Author();
+		author = new Author();
 		author.setId(100L);
 		author.setFirstName(null);
-		author.setMiddleName(null);
+		author.setMiddleName("None");
 		author.setLastName("Wilde");
 		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
 		Assert.assertTrue(quoteList.size() == 3);
+	}
+	
+	@Test
+	public void testFindQuotesByAuthorMiddleName(){
+		LOG.info("Running testFindQuotesByAuthorMiddleName()...");
+		author = new Author();
+		author.setId(null);
+		author.setFirstName(null);
+		author.setMiddleName(null);
+		author.setLastName(null);
+		Collection<Quote> quoteList = quoteService.findQuotesByAuthor(author);
+		Assert.assertTrue(quoteList.size() == 5);
 	}
 	
 	@Test(expected=QuoteNotFoundException.class)
@@ -101,4 +137,5 @@ public class QuoteServiceTest {
 		LOG.info("Running testFindQuotesByAuthor()...");
 		quoteService.findQuotesByAuthor(null);
 	}
+	
 }

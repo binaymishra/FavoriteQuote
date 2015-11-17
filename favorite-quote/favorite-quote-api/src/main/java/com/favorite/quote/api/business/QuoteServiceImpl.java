@@ -65,6 +65,8 @@ public class QuoteServiceImpl implements QuoteService {
 						return true;
 					}else if(StringUtils.equals(author.getLastName(), quote.getAuthor().getLastName())){
 						return true;
+					}else if(StringUtils.equals(author.getMiddleName(), quote.getAuthor().getMiddleName())){
+						return true;
 					}
 					return false;
 				}
