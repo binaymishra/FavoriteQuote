@@ -64,7 +64,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
-
+	
+		<!--Apache Commons Dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 		<!-- Server Dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -84,7 +89,7 @@
 		<dependency>
 			<groupId>com.favorite.quote</groupId>
 			<artifactId>favorite-quote-api</artifactId>
-			<version>${favorite-quote-version}</version>
+			<version>${favorite-quote-service-version}</version>
 		</dependency>
 	</dependencies>
 </project>
