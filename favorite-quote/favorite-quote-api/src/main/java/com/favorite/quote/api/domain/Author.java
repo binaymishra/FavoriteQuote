@@ -3,6 +3,8 @@ package com.favorite.quote.api.domain;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -94,5 +96,31 @@ public class Author implements Serializable{
 		builder.append("lastName", this.lastName);
 		builder.append("fullName", this.getFullName());
 		return builder.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		  return new HashCodeBuilder()
+	        .append(this.id)
+	        .append(this.firstName)
+	        .append(this.middleName)
+	        .append(this.lastName)
+	        .toHashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		 if(obj instanceof Author){
+			 final Author other = (Author) obj;
+			 return new EqualsBuilder()
+	            .append(this.id, other.id)
+	            .append(this.firstName, other.firstName)
+	            .append(this.middleName, other.middleName)
+	            .append(this.lastName, other.lastName)
+	            .isEquals();
+		 }else{
+			 return false;
+		 }
+		
 	}
 }
