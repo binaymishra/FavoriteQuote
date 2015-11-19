@@ -22,7 +22,6 @@ public class DataLoaderTest {
 	@Test
 	public void testDataLoader(){
 		List<String> quotes = dataLoader.loadQuotes();
-		System.err.println(quotes);
 		Assert.assertFalse( quotes.size() <= 0);
 	}
 
