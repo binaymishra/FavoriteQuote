@@ -1,5 +1,6 @@
 package com.favorite.quote.api.business;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import com.favorite.quote.api.repository.QuoteFileDataRepository;
 @Service("quoteFileService")
 public class QuoteFileServiceImpl implements QuoteService {
 	
-	private List<Quote> quotes;
+	private final List<Quote> quotes;
 	
 	@Autowired
 	public QuoteFileServiceImpl(@Qualifier("quoteFileDataRepository") QuoteFileDataRepository quoteFileDataRepository) {
@@ -27,7 +28,7 @@ public class QuoteFileServiceImpl implements QuoteService {
 	@Override
 	public Collection<Quote> findAllQuotes() {
 		if(CollectionUtils.isNotEmpty(quotes)){
-			return quotes;
+			return  quotes;
 		}
 		return CollectionUtils.emptyCollection();
 	}
@@ -35,8 +36,9 @@ public class QuoteFileServiceImpl implements QuoteService {
 	@Override
 	public Quote findQuoteById(final Long id) {
 		Quote quote = null;
-		if(CollectionUtils.isNotEmpty(quotes)){
-			quote = CollectionUtils.find(quotes, new Predicate<Quote>() {
+		List<Quote> quoteList = new ArrayList<Quote>(quotes);
+		if(CollectionUtils.isNotEmpty(quoteList)){
+			quote = CollectionUtils.find(quoteList, new Predicate<Quote>() {
 
 				@Override
 				public boolean evaluate(Quote quote) {
@@ -52,9 +54,10 @@ public class QuoteFileServiceImpl implements QuoteService {
 
 	@Override
 	public Collection<Quote> findQuotesByAuthor(Author quoteAuthor) {
+		List<Quote> quoteList = new ArrayList<Quote>(quotes);
 		if(quoteAuthor != null){
-			CollectionUtils.filter(quotes, new QuotePredicate(quoteAuthor));
-			return quotes;
+			CollectionUtils.filter(quoteList, new QuotePredicate(quoteAuthor));
+			return quoteList;
 		}else{
 			throw new QuoteNotFoundException("Invalid author "+quoteAuthor);
 		}

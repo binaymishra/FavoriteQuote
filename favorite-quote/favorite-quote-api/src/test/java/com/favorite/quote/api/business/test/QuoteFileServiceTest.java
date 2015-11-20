@@ -8,7 +8,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,6 @@ public class QuoteFileServiceTest {
 		int size = quoteFileService.findAllQuotes().size();
 		Assert.assertTrue(size > 0);
 	}
-	
 	@Test
 	public void testFindQuoteByIdFound(){
 		LOG.info("Running testFindQuoteByIdFound()...");
@@ -68,65 +66,21 @@ public class QuoteFileServiceTest {
 			
 	}
 	@Test
+	public void testFindQuotesByAuthor(){
+		LOG.info("Running testFindQuotesByAuthor()...");
+		author.setFirstName("Peter");
+		author.setLastName("Ustinov");
+		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
+		Assert.assertTrue(quotes.size() == 1);
+	}
+	@Test
 	public void testFindQuoteByIdNotFound(){
 		LOG.info("Running testFindQuoteByIdNotFound()...");
 		Quote quote = null;
 		quote = quoteFileService.findQuoteById(100L);
 		Assert.assertNull(quote);
 	}
-	@Ignore
-	@Test
-	public void testFindQuotesByAuthor(){
-		LOG.info("Running testFindQuotesByAuthor()...");
-		author.setFirstName("Victor");
-		author.setMiddleName("Gustav");
-		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 2);
-	}
-	@Ignore
-	@Test
-	public void testFindQuotesByAuthorFirstName(){
-		LOG.info("Running testFindQuotesByAuthor()...");
-		author.setFirstName("Oscar");
-		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 2);
-	}
-	@Ignore
-	@Test
-	public void testFindQuotesByAuthorMiddleName(){
-		LOG.info("Running testFindQuotesByAuthorMiddleName()...");
-		author.setMiddleName("Makepeace");
-		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 1);
-	}
-	@Ignore
-	@Test
-	public void testFindQuotesByAuthorLastName(){
-		LOG.info("Running testFindQuotesByAuthorLastName()...");
-		author.setLastName("Wilde");
-		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 2);
-	}
+
 	
-	//Author equality Test.
-	@Test
-	@Ignore
-	public void testAuthorForEquality(){
-		author.setFirstName("Binay");
-		author.setMiddleName(null);
-		author.setLastName("Mishra");
-		
-		//System.err.println(author.hashCode());
-		
-		Author binay = new Author();
-		binay.setFirstName("Binay");
-		binay.setMiddleName(null);
-		binay.setLastName("Mishra");
-		
-		//System.err.println(binay.hashCode());
-		
-		//System.out.println(author.equals(binay));
-		
-		Assert.assertSame(author, binay);
-	}
+	
 }

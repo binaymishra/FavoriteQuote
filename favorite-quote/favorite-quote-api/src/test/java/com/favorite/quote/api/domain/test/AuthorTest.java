@@ -16,7 +16,6 @@ public class AuthorTest {
 		author.setFirstName("Binay");
 		author.setMiddleName("Kumar");
 		author.setLastName("Mishra");
-		System.err.println(author);
 		Assert.assertTrue(StringUtils.isNotBlank(author.getFullName()));
 	}
 

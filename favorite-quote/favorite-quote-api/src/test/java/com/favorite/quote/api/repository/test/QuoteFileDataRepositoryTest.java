@@ -25,7 +25,6 @@ public class QuoteFileDataRepositoryTest {
 	@Test
 	public void testGetAllQuotes(){
 		List<Quote> quotes = quoteFileDataRepository.getAllQuotes();
-		System.err.println(quotes);
 		Assert.assertFalse(quotes.isEmpty());
 	}
 
