@@ -19,13 +19,12 @@ public class QuoteFileServiceLoggingAspect {
 	
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes())")
 	public void beforefindAllQuotes(){
+		LOGGER.info("Method: findAllQuotes() start.");
 		stopwatch.start();
-		LOGGER.info("Executing..beforefindAllQuotes()");
 	}
 
 	@AfterReturning("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes())")
 	public void afterReturningfindAllQuotes(){
-		System.err.println(stopwatch.stop());
-		LOGGER.info("Executing..afterReturningfindAllQuotes()");
+		LOGGER.info("Method: findAllQuotes() returned. Time elapsed "+stopwatch.stop()+".");
 	}
 }
