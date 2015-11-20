@@ -17,13 +17,15 @@ import com.favorite.quote.api.repository.QuoteFileDataRepository;
 @Service("quoteFileService")
 public class QuoteFileServiceImpl implements QuoteService {
 	
+	private List<Quote> quotes;
+	
 	@Autowired
-	@Qualifier("quoteFileDataRepository")
-	private QuoteFileDataRepository quoteFileDataRepository;
+	public QuoteFileServiceImpl(@Qualifier("quoteFileDataRepository") QuoteFileDataRepository quoteFileDataRepository) {
+		quotes = quoteFileDataRepository.getAllQuotes();
+	}
 
 	@Override
 	public Collection<Quote> findAllQuotes() {
-		List<Quote> quotes = quoteFileDataRepository.getAllQuotes();
 		if(CollectionUtils.isNotEmpty(quotes)){
 			return quotes;
 		}
@@ -33,7 +35,6 @@ public class QuoteFileServiceImpl implements QuoteService {
 	@Override
 	public Quote findQuoteById(final Long id) {
 		Quote quote = null;
-		List<Quote> quotes = quoteFileDataRepository.getAllQuotes();
 		if(CollectionUtils.isNotEmpty(quotes)){
 			quote = CollectionUtils.find(quotes, new Predicate<Quote>() {
 
@@ -52,12 +53,11 @@ public class QuoteFileServiceImpl implements QuoteService {
 	@Override
 	public Collection<Quote> findQuotesByAuthor(Author quoteAuthor) {
 		if(quoteAuthor != null){
-			Collection<Quote> quoteList = CollectionUtils.emptyCollection();
-			quoteList = quoteFileDataRepository.getAllQuotes(); 
-			CollectionUtils.filter(quoteList, new QuotePredicate(quoteAuthor));
-			return quoteList;
+			CollectionUtils.filter(quotes, new QuotePredicate(quoteAuthor));
+			return quotes;
 		}else{
 			throw new QuoteNotFoundException("Invalid author "+quoteAuthor);
-		}}
+		}
+	}
 
 }

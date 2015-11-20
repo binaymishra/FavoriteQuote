@@ -21,7 +21,7 @@ import com.favorite.quote.api.config.AppConfig;
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
-@Ignore
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 public class QuoteFileServiceTest {
@@ -74,6 +74,7 @@ public class QuoteFileServiceTest {
 		quote = quoteFileService.findQuoteById(100L);
 		Assert.assertNull(quote);
 	}
+	@Ignore
 	@Test
 	public void testFindQuotesByAuthor(){
 		LOG.info("Running testFindQuotesByAuthor()...");
@@ -82,7 +83,7 @@ public class QuoteFileServiceTest {
 		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
 		Assert.assertTrue(quotes.size() == 2);
 	}
-	
+	@Ignore
 	@Test
 	public void testFindQuotesByAuthorFirstName(){
 		LOG.info("Running testFindQuotesByAuthor()...");
@@ -90,6 +91,7 @@ public class QuoteFileServiceTest {
 		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
 		Assert.assertTrue(quotes.size() == 2);
 	}
+	@Ignore
 	@Test
 	public void testFindQuotesByAuthorMiddleName(){
 		LOG.info("Running testFindQuotesByAuthorMiddleName()...");
@@ -97,6 +99,7 @@ public class QuoteFileServiceTest {
 		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
 		Assert.assertTrue(quotes.size() == 1);
 	}
+	@Ignore
 	@Test
 	public void testFindQuotesByAuthorLastName(){
 		LOG.info("Running testFindQuotesByAuthorLastName()...");
@@ -107,6 +110,7 @@ public class QuoteFileServiceTest {
 	
 	//Author equality Test.
 	@Test
+	@Ignore
 	public void testAuthorForEquality(){
 		author.setFirstName("Binay");
 		author.setMiddleName(null);

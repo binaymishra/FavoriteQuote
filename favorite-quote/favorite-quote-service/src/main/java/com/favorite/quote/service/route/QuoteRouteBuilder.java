@@ -4,7 +4,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
-import com.favorite.quote.api.business.exception.QuoteNotFoundException;
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
@@ -14,8 +13,8 @@ public class QuoteRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
-		onException(QuoteNotFoundException.class).handled(true)
-		.beanRef("exceptionHandler","handleQuoteNotFoundException")
+		onException(Exception.class).handled(true)
+		.beanRef("exceptionHandler","handleException")
 		.stop();
 		
 		restConfiguration()
