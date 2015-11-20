@@ -26,9 +26,21 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
 					<address>localhost</address>
-					<port>8080</port>
+					<port>9090</port>
 					<path>/</path>
 					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>tomcat7</server>
+					<path>/</path>
+					<username>vinay</username>
+					<password>mishra</password>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>
