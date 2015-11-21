@@ -56,7 +56,7 @@ public class QuoteFileServiceImpl implements QuoteService {
 	public Collection<Quote> findQuotesByAuthor(Author quoteAuthor) {
 		List<Quote> quoteList = new ArrayList<Quote>(quotes);
 		if(quoteAuthor != null){
-			CollectionUtils.filter(quoteList, new QuotePredicate(quoteAuthor));
+			CollectionUtils.filter(quoteList, new QuoteAuthorPredicate(quoteAuthor));
 			return quoteList;
 		}else{
 			throw new QuoteNotFoundException("Invalid author "+quoteAuthor);

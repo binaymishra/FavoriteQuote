@@ -4,11 +4,11 @@ import org.apache.commons.collections4.Predicate;
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
-public class QuotePredicate implements Predicate<Quote> {
+public class QuoteAuthorPredicate implements Predicate<Quote> {
 	
 	private final Author author;
 	
-	public QuotePredicate(Author author){
+	public QuoteAuthorPredicate(Author author){
 		this.author = author;
 	}
 
