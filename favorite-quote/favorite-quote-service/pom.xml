@@ -37,7 +37,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>tomcat7</server>
-					<path>/</path>
+					<path>/favorite-quote-service</path>
 					<username>vinay</username>
 					<password>mishra</password>
 					<update>true</update>
