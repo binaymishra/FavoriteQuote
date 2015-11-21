@@ -1,12 +1,15 @@
 package com.favorite.quote.api.business.aspects;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Stopwatch;
+import com.favorite.quote.api.domain.Quote;
 
 
 /**
@@ -21,23 +24,25 @@ public class QuoteFileServiceLoggingAspect {
 	
 	private static Logger LOGGER = Logger.getLogger(QuoteFileServiceLoggingAspect.class);
 	
-	private Stopwatch stopwatch = Stopwatch.createUnstarted(); 
+	private long startTime;
 	
 	/**
 	 * This method aspect is invoked before method  QuoteFileService.findAllQuotes() call.
 	 */
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes())")
 	public void beforefindAllQuotes(){
-		LOGGER.info("Method: findAllQuotes() start.");
-		stopwatch.start();
+		startTime = System.currentTimeMillis();
+		LOGGER.info("Method: findAllQuotes() started.");
+		
 	}
 
 	/**
 	 * This method aspect is invoked after return of method QuoteFileService.findAllQuotes() call.
 	 */
-	@AfterReturning("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes(..))")
-	public void afterReturningfindAllQuotes(){
-		LOGGER.info("Method: findAllQuotes() returned. Time elapsed "+stopwatch.stop()+".");
+	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes(..))", returning = "quotes")
+	public void afterReturningfindAllQuotes(JoinPoint joinPoint, List<Quote> quotes){
+		long endTime  = System.currentTimeMillis();
+		LOGGER.info("Method: findAllQuotes() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -45,8 +50,8 @@ public class QuoteFileServiceLoggingAspect {
 	 */
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuoteById(..))")
 	public void beforefindQuoteById(){
-		LOGGER.info("Method: findQuoteById() start.");
-		stopwatch.start();
+		startTime = System.currentTimeMillis();
+		LOGGER.info("Method: findQuoteById() started.");
 	}
 	
 	/**
@@ -54,7 +59,8 @@ public class QuoteFileServiceLoggingAspect {
 	 */
 	@AfterReturning("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuoteById(..))")
 	public void afterReturningfindQuoteById(){
-		LOGGER.info("Method: findQuoteById() returned. Time elapsed "+stopwatch.stop()+".");
+		long endTime  = System.currentTimeMillis();
+		LOGGER.info("Method: findQuoteById() returned. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -62,15 +68,17 @@ public class QuoteFileServiceLoggingAspect {
 	 */
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuotesByAuthor(..))")
 	public void beforefindQuotesByAuthor(){
-		LOGGER.info("Method: findQuotesByAuthor() start.");
-		stopwatch.start();
+		startTime = System.currentTimeMillis();
+		LOGGER.info("Method: findQuotesByAuthor() started.");
+		
 	}
 	
 	/**
 	 * This method aspect is invoked after return of method QuoteFileService.findQuotesByAuthor() call.
 	 */
-	@AfterReturning("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuotesByAuthor())")
-	public void afterReturningQuotesByAuthor(){
-		LOGGER.info("Method: findQuotesByAuthor() returned. Time elapsed "+stopwatch.stop()+".");
+	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuotesByAuthor(..))", returning="quotes")
+	public void afterReturningQuotesByAuthor(JoinPoint joinPoint, List<Quote> quotes){
+		long endTime  = System.currentTimeMillis();
+		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 }
