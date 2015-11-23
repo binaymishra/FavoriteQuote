@@ -22,19 +22,3 @@ public class QuoteAuthorPredicate implements Predicate<Quote> {
 	}
 
 }
-
-
-
-/*if(author.getFirstName() != null 
-&& quoteAuthor.getFirstName() != null
-&& StringUtils.equals(author.getFirstName(), quoteAuthor.getFirstName())){
-return true;
-}else if(author.getMiddleName() != null 
-&& quoteAuthor.getMiddleName() != null
-&& StringUtils.equals(author.getMiddleName(), quoteAuthor.getMiddleName())){
-return true;
-}else if(author.getLastName() != null 
-&&  quoteAuthor.getLastName() != null 
-&& StringUtils.equals(author.getLastName(), quoteAuthor.getLastName())){
-return true;
-}*/
