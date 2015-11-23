@@ -11,6 +11,13 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+/**
+ * A Spring bean that is container aware and reads data from the file and loads in memory.
+ * At the time of spring container starts.
+ * 
+ * @author Binay Mishra
+ *
+ */
 public class DataLoader implements ResourceLoaderAware {
 	
 	private String filePath;

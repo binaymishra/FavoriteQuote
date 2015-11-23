@@ -10,12 +10,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * Quote domain Object
+ * 
+ * @author Binay Mishra
+ *
+ */
 @JsonInclude(value=Include.NON_NULL)
 public class Quote implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;

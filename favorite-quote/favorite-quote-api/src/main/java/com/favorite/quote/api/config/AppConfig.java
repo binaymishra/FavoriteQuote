@@ -14,6 +14,12 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 
 
+/**
+ * @author Binay Mishra
+ *
+ *Spring Java Configuration file.
+ *
+ */
 @Configuration
 @EnableCaching
 @EnableAspectJAutoProxy

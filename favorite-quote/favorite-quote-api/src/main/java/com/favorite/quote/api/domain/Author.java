@@ -11,6 +11,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * Author domain Object.
+ * 
+ * @author Binay Mishra
+ *
+ */
 @JsonInclude(value=Include.NON_NULL)
 public class Author implements Serializable{
 	

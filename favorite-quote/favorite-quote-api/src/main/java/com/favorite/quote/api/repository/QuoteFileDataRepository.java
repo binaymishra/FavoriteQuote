@@ -11,12 +11,23 @@ import com.favorite.quote.api.config.DataLoader;
 import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
+/**
+ * Quote data repository.
+ * 
+ * @author Binay Mishra
+ *
+ */
 @Component("quoteFileDataRepository")
 public class QuoteFileDataRepository {
 	
 	@Autowired
 	private DataLoader dataLoader;
 	
+	/**
+	 * This method returns list of quotes object by reading file that contains the quotes data.
+	 * 
+	 * @return
+	 */
 	public List<Quote> getAllQuotes(){
 		List<Quote> quotes = new ArrayList<Quote>();
 		for(String quoteString :dataLoader.loadQuotes()){
@@ -26,6 +37,11 @@ public class QuoteFileDataRepository {
 		
 	}
 
+	/**
+	 * Splits the data string uisng '|' to identify the Quote Id, Quote String and Author information.
+	 * @param split
+	 * @return
+	 */
 	private Quote createQuote(String[] split) {
 		Quote quote = new Quote();
 		quote.setId(Long.parseLong(StringUtils.trim(split[0])));
@@ -35,6 +51,12 @@ public class QuoteFileDataRepository {
 		return quote;
 	}
 
+	/**
+	 * Splits data string using space and populates the author data like First Name, Middle Name and Last Name. 
+	 * 
+	 * @param authorNameString
+	 * @return
+	 */
 	private Author createAuthor(String authorNameString) {
 		String[] authorNameParts = StringUtils.split(authorNameString);
 		Author author = new Author();
