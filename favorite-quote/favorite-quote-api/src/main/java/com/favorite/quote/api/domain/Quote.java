@@ -2,6 +2,8 @@ package com.favorite.quote.api.domain;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -67,14 +69,21 @@ public class Quote implements Serializable{
 	
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+		 return new HashCodeBuilder()
+	        .append(this.id)
+	        .toHashCode();
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		 if(obj instanceof Quote){
+			 final Quote other = (Quote) obj;
+			 return new EqualsBuilder()
+	            .append(this.id, other.id)
+	            .isEquals();
+		 }else{
+			 return false;
+		 }
 	}
 	
 	
