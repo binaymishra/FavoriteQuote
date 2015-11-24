@@ -86,7 +86,7 @@ public class QuoteFileServiceTest {
 		LOG.info("Running testFilterQuotesByAuthorFirstName()...");
 		author.setFirstName("Oscar");
 		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 3);
+		Assert.assertTrue(quotes.size() == 4);
 	}
 	
 	@Test
