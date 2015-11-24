@@ -43,7 +43,7 @@ public class DataLoader implements ResourceLoaderAware {
 			 reader = new BufferedReader(new InputStreamReader(in));
 			while(true){
 				String line = reader.readLine();
-					if(null == line){
+					if(null == line || line.length() <= 0 ){
 						break;
 					}else{
 						quotes.add(line);
