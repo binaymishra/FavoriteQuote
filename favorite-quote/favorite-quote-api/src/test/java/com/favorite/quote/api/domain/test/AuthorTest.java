@@ -19,4 +19,39 @@ public class AuthorTest {
 		Assert.assertTrue(StringUtils.isNotBlank(author.getFullName()));
 	}
 
+	@Test
+	public void testAuthorEquality(){
+		Author binay = new Author();
+		binay.setId(0L);
+		binay.setFirstName("Binay");
+		binay.setMiddleName("Kumar");
+		binay.setLastName("Mishra");
+		
+		Author vinay = new Author();
+		vinay.setId(0L);
+		vinay.setFirstName("Binay");
+		vinay.setMiddleName("Kumar");
+		vinay.setLastName("Mishra");
+		
+		Assert.assertTrue(binay.equals(vinay));
+	}
+	
+	@Test
+	public void testAuthorNotEquality(){
+		Author binay = new Author();
+		binay.setId(0L);
+		binay.setFirstName("Binay");
+		binay.setMiddleName("Kumar");
+		binay.setLastName("Mishra");
+		
+		Author vinay = new Author();
+		vinay.setId(0L);
+		vinay.setFirstName("Vinay");
+		vinay.setMiddleName("Kumar");
+		vinay.setLastName("Mishra");
+		
+		Assert.assertFalse(binay.equals(vinay));
+	}
+	
+	
 }
