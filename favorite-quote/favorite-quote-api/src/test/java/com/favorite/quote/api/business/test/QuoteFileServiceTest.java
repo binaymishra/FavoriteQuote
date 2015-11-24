@@ -81,6 +81,26 @@ public class QuoteFileServiceTest {
 		Assert.assertNull(quote);
 	}
 
+	@Test
+	public void testFilterQuotesByAuthorFirstName(){
+		LOG.info("Running testFilterQuotesByAuthorFirstName()...");
+		author.setFirstName("Oscar");
+		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+		Assert.assertTrue(quotes.size() == 3);
+	}
 	
-	
+	@Test
+	public void testFilterQuotesByAuthorMiddleName(){
+		LOG.info("Running testFilterQuotesByAuthorMiddleName()...");
+		author.setMiddleName("Makepeace");
+		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+		Assert.assertTrue(quotes.size() == 1);
+	}
+	@Test
+	public void testFilterQuotesByAuthorLastName(){
+		LOG.info("Running testFilterQuotesByAuthorFirstLastName()...");
+		author.setLastName("Hugo");
+		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+		Assert.assertTrue(quotes.size() == 1);
+	}
 }

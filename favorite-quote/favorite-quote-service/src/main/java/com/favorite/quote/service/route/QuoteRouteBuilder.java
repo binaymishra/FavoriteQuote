@@ -38,7 +38,12 @@ public class QuoteRouteBuilder extends RouteBuilder {
 			.post("/author")
 			.type(Author.class)
 			.outTypeList(Quote.class)
-			.to("bean:quoteFileService?method=findQuotesByAuthor(${body})");
+			.to("bean:quoteFileService?method=findQuotesByAuthor(${body})")
+		
+			.post("/author/filter")
+			.type(Author.class)
+			.outTypeList(Quote.class)
+			.to("bean:quoteFileService?method=filterQuotesByAuthor(${body})");
 
 	}
 

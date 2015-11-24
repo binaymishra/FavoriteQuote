@@ -63,4 +63,15 @@ public class QuoteFileServiceImpl implements QuoteService {
 		}
 	}
 
+	
+	@Override
+	public Collection<Quote> filterQuotesByAuthor(Author quoteAuthor) {
+		List<Quote> quoteList = new ArrayList<Quote>(quotes);
+		if(quoteAuthor != null){
+			CollectionUtils.filter(quoteList, new QuoteAuthorFilterPredicate(quoteAuthor));
+			return quoteList;
+		}else{
+			throw new QuoteNotFoundException("Invalid author "+quoteAuthor);
+		}
+	}
 }

@@ -36,5 +36,14 @@ public interface QuoteService {
 	 * @return
 	 */
 	public Collection<Quote> findQuotesByAuthor(Author author);
+
+	
+	/**
+	 * This method filters out the quotes via author's firstName, middleName and lastName
+	 * 
+	 * @param quoteAuthor
+	 * @return
+	 */
+	public Collection<Quote> filterQuotesByAuthor(Author quoteAuthor);
 	
 }

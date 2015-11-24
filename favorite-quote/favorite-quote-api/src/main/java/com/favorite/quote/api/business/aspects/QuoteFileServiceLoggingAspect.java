@@ -81,4 +81,23 @@ public class QuoteFileServiceLoggingAspect {
 		long endTime  = System.currentTimeMillis();
 		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
+	
+	/**
+	 * This method aspect is invoked before method  QuoteFileService.filterQuotesByAuthor() call.
+	 */
+	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.filterQuotesByAuthor(..))")
+	public void beforeFilterQuotesByAuthor(){
+		startTime = System.currentTimeMillis();
+		LOGGER.info("Method: findQuotesByAuthor() started.");
+		
+	}
+	
+	/**
+	 * This method aspect is invoked after return of method QuoteFileService.filterQuotesByAuthor() call.
+	 */
+	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.filterQuotesByAuthor(..))", returning="quotes")
+	public void afterReturningFilterQuotesByAuthor(JoinPoint joinPoint, List<Quote> quotes){
+		long endTime  = System.currentTimeMillis();
+		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+	}
 }
