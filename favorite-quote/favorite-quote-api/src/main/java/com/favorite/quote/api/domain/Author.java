@@ -79,6 +79,11 @@ public class Author implements Serializable{
 	
 	
 	//Other methods
+	
+	/**
+	 * This method return full name of the author
+	 * @return 
+	 */
 	public String getFullName(){
 		StringBuilder fullName = new StringBuilder();
 		if(StringUtils.isNotEmpty(firstName)){
@@ -91,6 +96,15 @@ public class Author implements Serializable{
 			fullName.append(StringUtils.defaultIfEmpty(lastName, ""));
 		}
 		return fullName.toString().trim();
+	}
+	
+	/**
+	 * This method returns photo name of the author.
+	 * @return
+	 */
+	public String getPhoto(){
+		return StringUtils.join(this.firstName, this.lastName, ".jpg");
+		
 	}
 	
 	@Override
