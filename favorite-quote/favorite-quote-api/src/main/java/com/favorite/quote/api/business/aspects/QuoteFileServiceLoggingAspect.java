@@ -34,7 +34,7 @@ public class QuoteFileServiceLoggingAspect {
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes())")
 	public void beforefindAllQuotes(){
 		startTime = System.currentTimeMillis();
-		LOGGER.info("Method: findAllQuotes() started.");
+		LOGGER.debug("Method: findAllQuotes() started.");
 		
 	}
 
@@ -44,7 +44,7 @@ public class QuoteFileServiceLoggingAspect {
 	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllQuotes(..))", returning = "quotes")
 	public void afterReturningfindAllQuotes(JoinPoint joinPoint, List<Quote> quotes){
 		long endTime  = System.currentTimeMillis();
-		LOGGER.info("Method: findAllQuotes() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+		LOGGER.debug("Method: findAllQuotes() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class QuoteFileServiceLoggingAspect {
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuoteById(..))")
 	public void beforefindQuoteById(){
 		startTime = System.currentTimeMillis();
-		LOGGER.info("Method: findQuoteById() started.");
+		LOGGER.debug("Method: findQuoteById() started.");
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class QuoteFileServiceLoggingAspect {
 	@AfterReturning("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuoteById(..))")
 	public void afterReturningfindQuoteById(){
 		long endTime  = System.currentTimeMillis();
-		LOGGER.info("Method: findQuoteById() returned. Time elapsed "+(endTime - startTime)+" ms.");
+		LOGGER.debug("Method: findQuoteById() returned. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class QuoteFileServiceLoggingAspect {
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuotesByAuthor(..))")
 	public void beforefindQuotesByAuthor(){
 		startTime = System.currentTimeMillis();
-		LOGGER.info("Method: findQuotesByAuthor() started.");
+		LOGGER.debug("Method: findQuotesByAuthor() started.");
 		
 	}
 	
@@ -81,7 +81,7 @@ public class QuoteFileServiceLoggingAspect {
 	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findQuotesByAuthor(..))", returning="quotes")
 	public void afterReturningQuotesByAuthor(JoinPoint joinPoint, List<Quote> quotes){
 		long endTime  = System.currentTimeMillis();
-		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+		LOGGER.debug("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class QuoteFileServiceLoggingAspect {
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.filterQuotesByAuthor(..))")
 	public void beforeFilterQuotesByAuthor(){
 		startTime = System.currentTimeMillis();
-		LOGGER.info("Method: findQuotesByAuthor() started.");
+		LOGGER.debug("Method: findQuotesByAuthor() started.");
 		
 	}
 	
@@ -100,7 +100,7 @@ public class QuoteFileServiceLoggingAspect {
 	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.filterQuotesByAuthor(..))", returning="quotes")
 	public void afterReturningFilterQuotesByAuthor(JoinPoint joinPoint, List<Quote> quotes){
 		long endTime  = System.currentTimeMillis();
-		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+		LOGGER.debug("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class QuoteFileServiceLoggingAspect {
 	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllAuthors())")
 	public void beforeFindAllAuthors(){
 		startTime = System.currentTimeMillis();
-		LOGGER.info("Method: findAllAuthors() started.");
+		LOGGER.debug("Method: findAllAuthors() started.");
 		
 	}
 	
@@ -119,6 +119,6 @@ public class QuoteFileServiceLoggingAspect {
 	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllAuthors())", returning="authors")
 	public void afterReturningFindAllAuthors(JoinPoint joinPoint, Set<Author> authors){
 		long endTime  = System.currentTimeMillis();
-		LOGGER.info("Method: findAllAuthors() returned "+authors.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+		LOGGER.debug("Method: findAllAuthors() returned "+authors.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 }
