@@ -2,7 +2,9 @@ package com.favorite.quote.api.business;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
@@ -77,7 +79,7 @@ public class QuoteFileServiceImpl implements QuoteService {
 
 	@Override
 	public Collection<Author> findAllAuthors() {
-		List<Author> authors = new ArrayList<Author>();
+		Set<Author> authors = new HashSet<Author>();
 		List<Quote> quoteList = new ArrayList<Quote>(quotes);
 		for(Quote quote: quoteList){
 			authors.add(quote.getAuthor());

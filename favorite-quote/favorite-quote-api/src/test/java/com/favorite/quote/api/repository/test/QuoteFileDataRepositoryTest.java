@@ -1,7 +1,8 @@
 package com.favorite.quote.api.repository.test;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class QuoteFileDataRepositoryTest {
 
 	@Test
 	public void testGetAllAuthors(){
-		List<Author> authors = new ArrayList<Author>();
+		Set<Author> authors = new HashSet<Author>();
 		List<Quote> quotes = quoteFileDataRepository.getAllQuotes();
 		for(Quote quote: quotes){
 			authors.add(quote.getAuthor());

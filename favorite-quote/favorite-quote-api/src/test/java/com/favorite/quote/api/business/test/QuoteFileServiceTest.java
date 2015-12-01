@@ -1,6 +1,7 @@
 package com.favorite.quote.api.business.test;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -107,7 +108,7 @@ public class QuoteFileServiceTest {
 	@Test
 	public void testFindAllAuthors(){
 		LOG.info("Running testFindAllAuthors()...");
-		List<Author> authors = (List<Author>) quoteFileService.findAllAuthors();
+		Set<Author> authors = (Set<Author>) quoteFileService.findAllAuthors();
 		Assert.assertFalse(authors.isEmpty());
 	}
 }

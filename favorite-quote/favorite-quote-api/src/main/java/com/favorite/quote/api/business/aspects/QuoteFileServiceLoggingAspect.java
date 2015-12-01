@@ -1,6 +1,7 @@
 package com.favorite.quote.api.business.aspects;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -116,7 +117,7 @@ public class QuoteFileServiceLoggingAspect {
 	 * This method aspect is invoked after return of method QuoteFileService.filterQuotesByAuthor() call.
 	 */
 	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllAuthors())", returning="authors")
-	public void afterReturningFindAllAuthors(JoinPoint joinPoint, List<Author> authors){
+	public void afterReturningFindAllAuthors(JoinPoint joinPoint, Set<Author> authors){
 		long endTime  = System.currentTimeMillis();
 		LOGGER.info("Method: findAllAuthors() returned "+authors.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}

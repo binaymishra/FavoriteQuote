@@ -32,7 +32,7 @@ public class QuoteRouteBuilder extends RouteBuilder {
 			.to("bean:quoteFileService?method=findAllQuotes")
 		
 			.get("/{id}")
-			.outTypeList(Quote.class)
+			.outType(Quote.class)
 			.to("bean:quoteFileService?method=findQuoteById(${header.id})")
 		
 			.post("/author")
@@ -44,6 +44,17 @@ public class QuoteRouteBuilder extends RouteBuilder {
 			.type(Author.class)
 			.outTypeList(Quote.class)
 			.to("bean:quoteFileService?method=filterQuotesByAuthor(${body})");
+		
+	
+		rest("author")
+		.description("Author RESTful Service.")
+		.consumes("application/json")
+		.produces("application/json")
+		
+			.get("")
+			.outTypeList(Author.class)
+			.to("bean:quoteFileService?method=findAllAuthors()");
+			
 
 	}
 
