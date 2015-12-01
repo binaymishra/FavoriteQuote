@@ -3,25 +3,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<head>
 		<title>Favorite Quotes</title>
-		<script src="resources/js/jquery.js"></script>
-		<script src="resources/js/jquery-ui.js"></script>
 		<script type="text/javascript" src="resources/lib/angular/angular.min.js"></script>
-		
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
-		<link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.css">
-		
-		<script type="text/javascript">
-		$(function() {
-			$('#quote_button').click(function(event){
-				$.getJSON('data.json', function(data){
-					alert('data length is '+data.length)
-				});
-			});
-		});
-		</script>
 	</head>
 	<body>
-		<div id="quote"></div>
-		<button id="quote_button">Click</button>
+		
 	</body>
 </html>
