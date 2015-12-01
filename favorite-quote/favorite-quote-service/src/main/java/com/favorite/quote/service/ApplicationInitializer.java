@@ -10,6 +10,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import com.favorite.quote.api.config.AppConfig;
+import com.favorite.quote.service.route.FevoriteQuoteServiceFilter;
 
 
 
@@ -20,11 +21,13 @@ public class ApplicationInitializer implements WebApplicationInitializer{
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
 		  applicationContext.register(ServiceConfig.class, AppConfig.class);
 		  servletContext.addListener(new ContextLoaderListener(applicationContext));
-
+		  servletContext.addFilter("FevoriteQuoteServiceFilter", new FevoriteQuoteServiceFilter())
+		  .addMappingForServletNames(null, false, "CamelServlet");
+		  
 		  ServletRegistration.Dynamic camelServlet = servletContext.addServlet("CamelServlet", new CamelHttpTransportServlet());
 		  camelServlet.setLoadOnStartup(1);
 		  camelServlet.addMapping("/*");
-		
 	}
 
+	
 }
