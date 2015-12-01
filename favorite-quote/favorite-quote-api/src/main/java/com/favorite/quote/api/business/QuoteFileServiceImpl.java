@@ -74,4 +74,14 @@ public class QuoteFileServiceImpl implements QuoteService {
 			throw new QuoteNotFoundException("Invalid author "+quoteAuthor);
 		}
 	}
+
+	@Override
+	public Collection<Author> findAllAuthors() {
+		List<Author> authors = new ArrayList<Author>();
+		List<Quote> quoteList = new ArrayList<Quote>(quotes);
+		for(Quote quote: quoteList){
+			authors.add(quote.getAuthor());
+		}
+		return authors;
+	}
 }

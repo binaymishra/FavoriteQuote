@@ -103,4 +103,11 @@ public class QuoteFileServiceTest {
 		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
 		Assert.assertTrue(quotes.size() == 1);
 	}
+	
+	@Test
+	public void testFindAllAuthors(){
+		LOG.info("Running testFindAllAuthors()...");
+		List<Author> authors = (List<Author>) quoteFileService.findAllAuthors();
+		Assert.assertFalse(authors.isEmpty());
+	}
 }

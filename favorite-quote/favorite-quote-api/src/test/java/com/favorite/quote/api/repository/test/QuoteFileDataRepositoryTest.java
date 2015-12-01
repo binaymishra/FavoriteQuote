@@ -1,5 +1,6 @@
 package com.favorite.quote.api.repository.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.favorite.quote.api.config.AppConfig;
+import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 import com.favorite.quote.api.repository.QuoteFileDataRepository;
 
@@ -28,4 +30,13 @@ public class QuoteFileDataRepositoryTest {
 		Assert.assertFalse(quotes.isEmpty());
 	}
 
+	@Test
+	public void testGetAllAuthors(){
+		List<Author> authors = new ArrayList<Author>();
+		List<Quote> quotes = quoteFileDataRepository.getAllQuotes();
+		for(Quote quote: quotes){
+			authors.add(quote.getAuthor());
+		}
+		Assert.assertFalse(authors.isEmpty());
+	}
 }

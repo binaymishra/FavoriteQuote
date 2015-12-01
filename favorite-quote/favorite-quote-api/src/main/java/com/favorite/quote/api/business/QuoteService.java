@@ -46,4 +46,12 @@ public interface QuoteService {
 	 */
 	public Collection<Quote> filterQuotesByAuthor(Author quoteAuthor);
 	
+	
+	/**
+	 * This method returns collection of author information. 
+	 * 
+	 * @return
+	 */
+	public Collection<Author> findAllAuthors();
+	
 }

@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
 
@@ -99,5 +100,24 @@ public class QuoteFileServiceLoggingAspect {
 	public void afterReturningFilterQuotesByAuthor(JoinPoint joinPoint, List<Quote> quotes){
 		long endTime  = System.currentTimeMillis();
 		LOGGER.info("Method: findQuotesByAuthor() returned "+quotes.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
+	}
+	
+	/**
+	 * This method aspect is invoked before method  QuoteFileService.filterQuotesByAuthor() call.
+	 */
+	@Before("execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllAuthors())")
+	public void beforeFindAllAuthors(){
+		startTime = System.currentTimeMillis();
+		LOGGER.info("Method: findAllAuthors() started.");
+		
+	}
+	
+	/**
+	 * This method aspect is invoked after return of method QuoteFileService.filterQuotesByAuthor() call.
+	 */
+	@AfterReturning(pointcut="execution(* com.favorite.quote.api.business.QuoteFileServiceImpl.findAllAuthors())", returning="authors")
+	public void afterReturningFindAllAuthors(JoinPoint joinPoint, List<Author> authors){
+		long endTime  = System.currentTimeMillis();
+		LOGGER.info("Method: findAllAuthors() returned "+authors.size()+" result. Time elapsed "+(endTime - startTime)+" ms.");
 	}
 }
