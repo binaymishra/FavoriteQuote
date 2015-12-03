@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html ng-app>
+<html lang ="eng" ng-app="quoteAuthor">
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 	<head>
 		<title>Authors</title>
-		<script type="text/javascript" src="resources/lib/angular/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
-		<script type="text/javascript">
-		function Authors($scope, $http) {
-				$http.get('http://localhost:8080/favorite-quote-service/author').
-	        		success(function(data) {
-	            		$scope.authors = data;
-	        });
-		}
-	</script>
+		<script type="text/javascript" src="resources/lib/angular/angular.min.js"></script>
+		<script type="text/javascript" src="resources/js/controllers.js"></script>
 	</head>
 	<body>
 		<div ng-controller="Authors">
+		<div>
+			<label>Search: </label>
+			<input type="text"  autofocus="autofocus" ng-model="query"/>
+		</div>
 		<ul>
-			<li ng-repeat="author in authors">
+			<li ng-repeat="author in authors | filter: query ">
 					{{author.firstName}}  {{author.lastName}}
 			</li>
 		</ul>
