@@ -22,93 +22,102 @@ import com.favorite.quote.api.domain.Author;
 import com.favorite.quote.api.domain.Quote;
 
 
+/**
+ * @author Binay Mishra
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 public class QuoteFileServiceTest {
-	
-	private static final Logger LOG = Logger.getLogger(QuoteFileServiceTest.class);
-	
-	@Autowired
-	@Qualifier("quoteFileService")
-	private QuoteService quoteFileService;
-	
-	private Author author;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+    private static final Logger LOG = Logger.getLogger(QuoteFileServiceTest.class);
 
-	@Before
-	public void setUp() throws Exception {
-		author = new Author();
-	}
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		 author = null;
-	}
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
 
-	@Test
-	public void testFindAllQuotes(){
-		LOG.info("Running testFindAllQuotes()...");
-		int size = quoteFileService.findAllQuotes().size();
-		Assert.assertTrue(size > 0);
-	}
-	@Test
-	public void testFindQuoteByIdFound(){
-		LOG.info("Running testFindQuoteByIdFound()...");
-		Quote quote = null;
-		quote = quoteFileService.findQuoteById(1L);
-		Assert.assertNotNull(quote);
-			
-	}
-	@Test
-	public void testFindQuotesByAuthor(){
-		LOG.info("Running testFindQuotesByAuthor()...");
-		author.setFirstName("Peter");
-		author.setLastName("Ustinov");
-		List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 1);
-	}
-	@Test
-	public void testFindQuoteByIdNotFound(){
-		LOG.info("Running testFindQuoteByIdNotFound()...");
-		Quote quote = null;
-		quote = quoteFileService.findQuoteById(100L);
-		Assert.assertNull(quote);
-	}
+    private Author author;
 
-	@Test
-	public void testFilterQuotesByAuthorFirstName(){
-		LOG.info("Running testFilterQuotesByAuthorFirstName()...");
-		author.setFirstName("Oscar");
-		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 4);
-	}
-	
-	@Test
-	public void testFilterQuotesByAuthorMiddleName(){
-		LOG.info("Running testFilterQuotesByAuthorMiddleName()...");
-		author.setMiddleName("Makepeace");
-		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 1);
-	}
-	@Test
-	public void testFilterQuotesByAuthorLastName(){
-		LOG.info("Running testFilterQuotesByAuthorFirstLastName()...");
-		author.setLastName("Hugo");
-		List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
-		Assert.assertTrue(quotes.size() == 1);
-	}
-	
-	@Test
-	public void testFindAllAuthors(){
-		LOG.info("Running testFindAllAuthors()...");
-		Set<Author> authors = (Set<Author>) quoteFileService.findAllAuthors();
-		Assert.assertFalse(authors.isEmpty());
-	}
+    @Autowired
+    @Qualifier("quoteFileService")
+    private QuoteService quoteFileService;
+
+    @Before
+    public void setUp() throws Exception {
+        author = new Author();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        author = null;
+    }
+
+    @Test
+    public void testFilterQuotesByAuthorFirstName(){
+        LOG.info("Running testFilterQuotesByAuthorFirstName()...");
+        author.setFirstName("Oscar");
+        final List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+        Assert.assertTrue(quotes.size() == 4);
+    }
+
+    @Test
+    public void testFilterQuotesByAuthorLastName(){
+        LOG.info("Running testFilterQuotesByAuthorFirstLastName()...");
+        author.setLastName("Hugo");
+        final List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+        Assert.assertTrue(quotes.size() == 1);
+    }
+
+    @Test
+    public void testFilterQuotesByAuthorMiddleName(){
+        LOG.info("Running testFilterQuotesByAuthorMiddleName()...");
+        author.setMiddleName("Makepeace");
+        final List<Quote> quotes = (List<Quote>) quoteFileService.filterQuotesByAuthor(author);
+        Assert.assertTrue(quotes.size() == 1);
+    }
+
+    /**
+     * @author Binay Mishra
+     */
+    @Test
+    public void testFindAllAuthors(){
+        LOG.info("Running testFindAllAuthors()...");
+        final Set<Author> authors = (Set<Author>) quoteFileService.findAllAuthors();
+        Assert.assertFalse(authors.isEmpty());
+    }
+
+    @Test
+    public void testFindAllQuotes(){
+        LOG.info("Running testFindAllQuotes()...");
+        final int size = quoteFileService.findAllQuotes().size();
+        Assert.assertTrue(size > 0);
+    }
+
+    @Test
+    public void testFindQuoteByIdFound(){
+        LOG.info("Running testFindQuoteByIdFound()...");
+        Quote quote = null;
+        quote = quoteFileService.findQuoteById(1L);
+        Assert.assertNotNull(quote);
+
+    }
+    @Test
+    public void testFindQuoteByIdNotFound(){
+        LOG.info("Running testFindQuoteByIdNotFound()...");
+        Quote quote = null;
+        quote = quoteFileService.findQuoteById(100L);
+        Assert.assertNull(quote);
+    }
+
+    @Test
+    public void testFindQuotesByAuthor(){
+        LOG.info("Running testFindQuotesByAuthor()...");
+        author.setFirstName("Peter");
+        author.setLastName("Ustinov");
+        final List<Quote> quotes = (List<Quote>) quoteFileService.findQuotesByAuthor(author);
+        Assert.assertTrue(quotes.size() == 1);
+    }
 }

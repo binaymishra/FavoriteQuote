@@ -12,7 +12,7 @@
 	</modules>
 	<properties>
 		<favorite-quote-version>0.0.1-SNAPSHOT</favorite-quote-version>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>

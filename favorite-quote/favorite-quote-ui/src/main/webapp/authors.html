@@ -15,7 +15,7 @@
 			<input type="text"  autofocus="autofocus" ng-model="query"/>
 		</div>
 		<ul class="artistlist">
-			<li class="artist cf" ng-repeat="author in authors | filter: query ">
+			<li class="artist cf" ng-repeat="author in authors | filter: query | order">
 			<img ng-src="resources/images/authors/{{author.photo}}" alt="Photo of {{author.firstName}}  {{author.lastName}}">
 					<div class="info">
         				<h2>{{author.firstName}}  {{author.lastName}}</h2>
